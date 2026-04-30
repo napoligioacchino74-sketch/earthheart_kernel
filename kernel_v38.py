@@ -47,15 +47,55 @@ class EarthheartSocialEthics:
             return "Attenzione: Verificare la documentazione e i canali di dialogo con le istituzioni."
 
 
+class EarthheartGreenTransition:
+    def __init__(self, total_diesel_savings: float):
+        self.total_diesel_savings = total_diesel_savings
+        
+    def calculate_quantum_allocation(self) -> dict:
+        weights = {
+            "Turbine da fondo e superficie": 0.30,  # 30%
+            "Turbine Sun Flower": 0.25,            # 25%
+            "Pavimenti piezoelettrici": 0.20,       # 20%
+            "Turbine da tunnel": 0.15,              # 15%
+            "Fondo di riserva e R&D": 0.10          # 10%
+        }
+        allocation = {tech: self.total_diesel_savings * weight for tech, weight in weights.items()}
+        return allocation
+
+    def compare_scenarios(self, years: int = 5) -> dict:
+        capex = 200000000.0
+        total_diesel_cost = 96000000.0 * years
+        
+        # Risparmio totale (al netto dell'OPEX)
+        total_savings = self.total_diesel_savings * years
+        
+        # Suddivisione del risparmio
+        innovator_share = total_savings * 0.20  # Quota per noi
+        community_share = total_savings * 0.60
+        
+        # Utile netto del progetto
+        net_balance_earthheart = total_savings - capex
+        
+        # ROI del Progetto (Utile Netto / CAPEX * 100)
+        project_roi = (net_balance_earthheart / capex) * 100
+        
+        return {
+            "Costo totale scenario Diesel": total_diesel_cost,
+            "Bilancio netto Earthheart": net_balance_earthheart,
+            "ROI del Progetto (%)": project_roi,
+            "La Nostra Quota (20%)": innovator_share
+        }
+
+
 if __name__ == "__main__":
     dummy_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     security = EarthheartKernelSecurity(expected_hash=dummy_hash)
     ethics = EarthheartSocialEthics()
+    transition = EarthheartGreenTransition(total_diesel_savings=91000000.0)
     
-    print(f"1. Integrità Kernel: {security.verify_integrity('kernel_v38.py')}")
-    dividendo = ethics.calculate_social_dividend(17000000)
-    print(f"2. Dividendo Sociale per le comunità: ${dividendo:,.2f}")
-    status = ethics.assess_environmental_impact(42000.0)
-    print(f"3. Stato Ambientale: {status}")
-    gov_status = ethics.verify_governmental_collaboration(government_agreement_active=True, transparency_index=0.99)
-    print(f"4. Stato Collaborazione Istituzionale: {gov_status}")
+    confronto = transition.compare_scenarios(years=5)
+    for scenario, val in confronto.items():
+        if "ROI" in scenario:
+            print(f"   - {scenario}: {val:.2f}%")
+        else:
+            print(f"   - {scenario}: ${val:,.2f}")
