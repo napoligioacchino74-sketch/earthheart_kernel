@@ -1,0 +1,25 @@
+{
+  "name": "earthheart_kernel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/napoligioacchino74-sketch/earthheart_kernel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/napoligioacchino74-sketch/earthheart_kernel/issues"
+  },
+  "homepage": "https://github.com/napoligioacchino74-sketch/earthheart_kernel#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^7.0.0",
+    "hardhat": "^3.4.3"
+  }
+}
